@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="confDAO" class="selfanswer.conf.ConfDAO"/>
+
+	<bean id="confService1" class="selfanswer.conf.ConfService">
+		<constructor-arg>
+			<ref bean="confDAO"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="confService2" class="selfanswer.conf.ConfService">
+		<constructor-arg ref="confDAO"/>
+	</bean>
+	
+	<bean id="constructorService1" class="selfanswer.conf.ConstructorService">
+		<constructor-arg index="0" value="param0"/>
+		<constructor-arg index="1" value="100"/>
+	</bean>
+	
+	<bean id="constructorService2" class="selfanswer.conf.ConstructorService">
+		<constructor-arg type="java.lang.String" value="param0"/>
+		<constructor-arg type="int" value="100"/>
+	</bean>
+	
+	<bean id="abstractService" abstract="true" class="selfanswer.conf.AbstractService">
+		<property name="name" value="thisName"/>
+	</bean>
+	
+	<bean id="reuseService" parent="abstractService" class="selfanswer.conf.ReuseService">
+	</bean>
+	
+	<import resource="AServices.xml"/>
+	<import resource="BServices.xml"/>
+</beans>

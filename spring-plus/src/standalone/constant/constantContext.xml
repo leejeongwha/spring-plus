@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="constantField1" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="constant.ConstantModel.CONSTANT"/>
+	</bean>
+	
+	<bean id="usingConstant1" class="constant.UsingConstant">
+		<property name="constant" ref="constantField1"/>
+	</bean>
+	
+	<bean id="constant.ConstantModel.CONSTANT" class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+	
+	<bean id="usingConstant2" class="constant.UsingConstant">
+		<property name="constant" ref="constant.ConstantModel.CONSTANT"/>
+	</bean>
+	
+	<bean id="usingConstant3" class="constant.UsingConstant">
+		<property name="constant">
+			<util:constant static-field="constant.ConstantModel.CONSTANT"/>
+		</property>
+	</bean>
+</beans>
+

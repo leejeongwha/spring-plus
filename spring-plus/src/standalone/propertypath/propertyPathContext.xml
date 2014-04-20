@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="parentBean1" class="propertypath.ParentBean">
+		<property name="childBean">
+			<bean class="propertypath.ChildBean">
+				<property name="name" value="child"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="parentBean1.childBean" 
+		class="org.springframework.beans.factory.config.PropertyPathFactoryBean"/>
+	
+	<bean id="parentBean2" class="propertypath.ParentBean">
+		<property name="childBean" ref="parentBean1.childBean"/>
+	</bean>
+	
+	<bean id="childName" class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+		<property name="targetBeanName" value="parentBean1"/>
+		<property name="propertyPath" value="childBean.name"/>
+	</bean>
+	
+	<util:property-path id="child1" path="parentBean1.childBean"/>
+	
+	<bean id="parentBean3" class="propertypath.ParentBean">
+		<property name="childBean" ref="child1"/>
+	</bean>
+</beans>
