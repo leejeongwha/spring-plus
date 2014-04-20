@@ -6,6 +6,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+
+
 	<properties>
 		<jdk-version>1.6</jdk-version>
 		<source-encoding>UTF-8</source-encoding>
